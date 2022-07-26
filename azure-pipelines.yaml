@@ -11,7 +11,7 @@ stages:
     # Needed for Terraform VM deployment
     # - task: InstallSSHKey@0
     #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
+    #     knownHostsEntry: 'SHA256:3ZaIIWlSjgqZ/eN5hPXtAiLBrivfrL8QkV9qlMDngK4 jantzilla@LAPTOP-KLHL6MFI'
     #     sshPublicKey: 'PUBLIC_KEY'
     #     sshKeySecureFile: 'id_rsa'
     - task: ArchiveFiles@2
