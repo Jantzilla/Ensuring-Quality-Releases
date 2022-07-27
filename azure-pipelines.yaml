@@ -38,13 +38,13 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: 'my_service_connection'
-              appName: 'webapp-appservice'
+              appName: 'webapp-appservice-64078'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   - deployment: VMDeploy
-    displayName: "Deploy VM"
+    displayName: "VMDeploy"
     environment:
-      name:  VM
+      name:  VMEnv
       resourceType: VirtualMachine
       # tags: TAG NAME
     strategy:
