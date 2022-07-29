@@ -92,7 +92,7 @@ stages:
         targetType: filePath
         filePath: 'jmeter/test.sh'
         arguments: '$PWD Endurance.jmx $(host)'
-        workingDirectory: jmeter
+        workingDirectory: automatedtesting/jmeter
         failOnStderr: true
     - task: PublishPipelineArtifact@1
       displayName: Publish JMeter Report
