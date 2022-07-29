@@ -68,8 +68,7 @@ stages:
               appName: 'webapp-appservice-64078'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-  - deployment: VMDeploy
-    displayName: "VMDeploy"
+  - deployment: Deploy
     environment:
       name:  VMEnv
       resourceType: VirtualMachine
@@ -91,15 +90,6 @@ stages:
                 pip3 install selenium
               
           - script: | 
-              # Install ChromeDriver.
-              # CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE`
-              # wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
-              # unzip ~/chromedriver_linux64.zip -d ~/
-              # rm ~/chromedriver_linux64.zip
-              # sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-              # sudo chown root:root /usr/local/bin/chromedriver
-              # sudo chmod 0755 /usr/local/bin/chromedriver
-              # sudo find / -type f -name chromedriver
               export PATH=$PATH:/snap/bin/chromium.chromedriver
               echo $PATH
               python3 test.py
