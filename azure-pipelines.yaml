@@ -89,7 +89,7 @@ stages:
               google-chrome --version
               chromium --version 
               sudo find / -type f -name chromedriver
-              export PATH=$PATH:/snap/chromium/2036/usr/lib/chromium-browser/chromedriver
+              export PATH=$PATH:/snap/chromium/2036/usr/lib/chromium-browser
               echo $PATH
               python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
