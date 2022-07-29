@@ -70,7 +70,9 @@ stages:
                 pip3 install selenium
               
           - script: | 
-              export PATH='$PATH:/usr/bin/chromedriver'
+              echo PATH
+              export PATH=$PATH:/usr/bin/chromedriver
+              echo PATH
               python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
