@@ -34,7 +34,7 @@ stages:
     - script: 'npm install -g newman'
       workingDirectory: '$(System.DefaultWorkingDirectory)'
       displayName: 'Install newman'
-    - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export results/junitReport.xml '
+    - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export results/regressionReport.xml '
       workingDirectory: automatedtesting/postman
       displayName: 'Run API Tests'
       continueOnError: true
@@ -43,7 +43,7 @@ stages:
       inputs:
         testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/results/*.xml'
 
-    - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export results/junitReport.xml '
+    - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export results/dataValidationReport.xml '
       workingDirectory: automatedtesting/postman
       displayName: 'Run API Tests'
       continueOnError: true
