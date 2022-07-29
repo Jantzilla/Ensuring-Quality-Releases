@@ -14,6 +14,13 @@ stages:
         knownHostsEntry: 'SHA256:3ZaIIWlSjgqZ/eN5hPXtAiLBrivfrL8QkV9qlMDngK4 jantzilla@LAPTOP-KLHL6MFI'
         sshPublicKey: '$(myPubKey)'
         sshKeySecureFile: 'id_rsa'
+
+    - script: 'terraform init'
+      workingDirectory: terraform
+      displayName: 'Initialize Terraform Resources'
+    - script: 'terraform apply'
+      workingDirectory: terraform
+      displayName: 'Apply Terraform Resources'
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
