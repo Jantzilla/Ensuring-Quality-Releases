@@ -43,7 +43,7 @@ stages:
     - task: PublishTestResults@2
       displayName: 'Publish Test Results'
       inputs:
-        testResultsFiles: '$(System.DefaultWorkingDirectory)\automatedtesting\postman\Results\*.xml'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/results/*.xml'
 - stage:
   jobs:
   - deployment: FakeRestAPI
