@@ -70,26 +70,16 @@ stages:
                 pip3 install selenium
               
           - script: | 
-              echo $PATH
-              export PATH=$PATH:/usr/bin/chromedriver
-              echo $PATH
-              export PATH=$PATH:/usr/lib/chromium-browser/chromedriver
-              echo $PATH
-              whereis chromium-chromedriver
-              whereis chromedriver
-              whereis chromium-browser
-              export PATH=$PATH:/usr/bin/chromium-browser/chromedriver
-              export PATH=$PATH:/snap/bin/chromium.chromedriver
-              export PATH=$PATH:/snap/bin/chromium
-              echo $PATH
-              echo $CHROMEWEBDRIVER
-              export PATH=$PATH:$CHROMEWEBDRIVER
-              export PATH=$PATH:/usr/local/share/chrome_driver
-              echo $PATH
-              google-chrome --version
-              chromium --version 
-              sudo find / -type f -name chromedriver
-              export PATH=$PATH:/snap/chromium/2036/usr/lib/chromium-browser
+              # Install ChromeDriver.
+              CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+              wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
+              unzip ~/chromedriver_linux64.zip -d ~/
+              rm ~/chromedriver_linux64.zip
+              sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+              sudo chown root:root /usr/local/bin/chromedriver
+              sudo chmod 0755 /usr/local/bin/chromedriver
+              # sudo find / -type f -name chromedriver
+              # export PATH=$PATH:/snap/chromium/2036/usr/lib/chromium-browser
               echo $PATH
               python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
