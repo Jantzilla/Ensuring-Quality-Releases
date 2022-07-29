@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "e6b5fee6-352c-4e07-b145-24dec247c3ef",
+		"name": "Data Validation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Tiger Nixon\");",
+							"    pm.expect(pm.response.text()).to.include(\"Garrett Winters\");",
+							"    pm.expect(pm.response.text()).to.include(\"Ashton Cox\");",
+							"    pm.expect(pm.response.text()).to.include(\"Cedric Kelly\");",
+							"    pm.expect(pm.response.text()).to.include(\"Airi Satou\");",
+							"    pm.expect(pm.response.text()).to.include(\"Brielle Williamson\");",
+							"    pm.expect(pm.response.text()).to.include(\"Herrod Chandler\");",
+							"    pm.expect(pm.response.text()).to.include(\"Rhona Davidson\");",
+							"    pm.expect(pm.response.text()).to.include(\"Colleen Hurst\");",
+							"    pm.expect(pm.response.text()).to.include(\"Sonya Frost\");",
+							"    pm.expect(pm.response.text()).to.include(\"Jena Gaines\");",
+							"    pm.expect(pm.response.text()).to.include(\"Quinn Flynn\");",
+							"    pm.expect(pm.response.text()).to.include(\"Charde Marshall\");",
+							"    pm.expect(pm.response.text()).to.include(\"Haley Kennedy\");",
+							"    pm.expect(pm.response.text()).to.include(\"Tatyana Fitzpatrick\");",
+							"    pm.expect(pm.response.text()).to.include(\"Michael Silva\");",
+							"    pm.expect(pm.response.text()).to.include(\"Paul Byrd\");",
+							"    pm.expect(pm.response.text()).to.include(\"Gloria Little\");",
+							"    pm.expect(pm.response.text()).to.include(\"Bradley Greer\");",
+							"    pm.expect(pm.response.text()).to.include(\"Dai Rios\");",
+							"    pm.expect(pm.response.text()).to.include(\"Jenette Caldwell\");",
+							"    pm.expect(pm.response.text()).to.include(\"Yuri Berry\");",
+							"    pm.expect(pm.response.text()).to.include(\"Caesar Vance\");",
+							"    pm.expect(pm.response.text()).to.include(\"Doris Wilder\");",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! All records has been fetched.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Tiger Nixon\");",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been fetched.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/{{id}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var name = pm.environment.get(\"name\")",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(name);",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been added.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var name = pm.environment.get(\"name\")",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(name);",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been updated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/{{id}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var id = pm.environment.get(\"id\")",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(id);",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been deleted\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/{{id}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
