@@ -30,6 +30,24 @@ stages:
         artifactName: 'automatedtesting'
         targetPath: 'automatedtesting'
         publishLocation: 'pipeline'
+
+    # - task: NodeTool@0
+    #   inputs:
+    #     versionSpec: '6.x'
+
+    - script: 'npm install -g newman'
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+      displayName: 'Install newman'
+    - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
+      workingDirectory: automatedtesting/postman
+      displayName: 'Run API Tests'
+    - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
+      workingDirectory: automatedtesting/postman
+      displayName: 'Run API Tests'
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFiles: '$(System.DefaultWorkingDirectory)\automatedtesting\postman\Results\*.xml'
 - stage:
   jobs:
   - deployment: FakeRestAPI
@@ -84,20 +102,6 @@ stages:
               python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
-
-          - script: 'npm install -g newman'
-            workingDirectory: '$(System.DefaultWorkingDirectory)'
-            displayName: 'Install newman'
-          - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
-            workingDirectory: automatedtesting/postman
-            displayName: 'Run API Tests'
-          - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
-            workingDirectory: automatedtesting/postman
-            displayName: 'Run API Tests'
-          - task: PublishTestResults@2
-            displayName: 'Publish Test Results'
-            inputs:
-              testResultsFiles: '$(System.DefaultWorkingDirectory)\automatedtesting\postman\Results\*.xml'
     
   #   variables:
   #     host: webapp-appservice-64078.azurewebsites.net
