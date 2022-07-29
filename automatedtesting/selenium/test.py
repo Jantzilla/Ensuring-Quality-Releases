@@ -7,6 +7,7 @@ from remove import removeItemsFromCart
 
 # --uncomment when running in Azure DevOps.
 options = ChromeOptions()
+options.add_argument('--headless')
 options.add_argument("start-maximized")
 options.add_argument("disable-infobars")
 options.add_argument("--disable-extensions")
