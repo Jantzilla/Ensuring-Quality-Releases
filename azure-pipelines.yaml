@@ -68,9 +68,10 @@ stages:
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
-                export PATH=$PATH:/usr/bin/chromedriver
               
-          - script: 'python3 test.py'
+          - script: | 
+              export PATH=$PATH:/usr/bin/chromedriver
+              python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
 
