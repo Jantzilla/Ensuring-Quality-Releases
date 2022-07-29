@@ -70,7 +70,7 @@ stages:
                 export PATH=$PATH:some/path
               
           - script: 'python3 test.py'
-            workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
+            workingDirectory: '$(Pipeline.Workspace)/selenium'
             displayName: 'Run Functional Tests'
 
           - script: 'npm install -g newman'
