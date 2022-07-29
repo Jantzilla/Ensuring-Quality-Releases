@@ -18,7 +18,7 @@ stages:
     - script: 'terraform init'
       workingDirectory: terraform
       displayName: 'Initialize Terraform Resources'
-    - script: 'terraform apply'
+    - script: 'terraform apply -auto-approve'
       workingDirectory: terraform
       displayName: 'Apply Terraform Resources'
     - task: ArchiveFiles@2
