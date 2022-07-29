@@ -24,11 +24,11 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-    # - task: PublishPipelineArtifact@1
-    #   displayName: 'Publish Pipeline Artifact'
-    #   inputs:
-    #     targetPath: '$(Pipeline.Workspace)'
-    #     publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact'
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        publishLocation: 'pipeline'
 - stage:
   jobs:
   - deployment: FakeRestAPI
