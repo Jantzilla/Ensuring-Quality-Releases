@@ -68,8 +68,8 @@ stages:
               appName: 'webapp-appservice-64078'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-  - deployment: Deploy
-    environment:
+  - deployment: VMDeploy
+    environment: 
       name:  VMEnv
       resourceType: VirtualMachine
       # tags: TAG NAME
