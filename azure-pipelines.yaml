@@ -73,6 +73,9 @@ stages:
               echo $PATH
               export PATH=$PATH:/usr/bin/chromedriver
               echo $PATH
+              export PATH=$PATH:/usr/lib/chromium-browser/chromedriver
+              echo $PATH
+              whereis chromedriver
               python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
