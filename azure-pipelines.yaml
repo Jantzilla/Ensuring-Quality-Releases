@@ -37,9 +37,11 @@ stages:
     - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export results/junitReport.xml '
       workingDirectory: automatedtesting/postman
       displayName: 'Run API Tests'
+      continueOnError: true
     - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export results/junitReport.xml '
       workingDirectory: automatedtesting/postman
       displayName: 'Run API Tests'
+      continueOnError: true
     - task: PublishTestResults@2
       displayName: 'Publish Test Results'
       inputs:
