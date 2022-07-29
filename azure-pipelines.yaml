@@ -27,7 +27,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Pipeline Artifact'
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: 'automatedtesting'
         publishLocation: 'pipeline'
 - stage:
   jobs:
