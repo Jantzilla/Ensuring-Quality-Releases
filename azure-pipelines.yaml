@@ -9,11 +9,11 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: 'SHA256:3ZaIIWlSjgqZ/eN5hPXtAiLBrivfrL8QkV9qlMDngK4 jantzilla@LAPTOP-KLHL6MFI'
+        sshPublicKey: '$(myPubKey)'
+        sshKeySecureFile: 'id_rsa'
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
@@ -38,30 +38,44 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: 'my_service_connection'
-              appName: 'webapp-appservice'
+              appName: 'webapp-appservice-64078'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-  # - deployment: VMDeploy
-  #   displayName: NAME
-  #   environment:
-  #     name:  ENVIRONMENT NAME
-  #     resourceType: VirtualMachine
-  #     tags: TAG NAME
-  #   strategy:
-  #     runOnce:
-  #       deploy:
-  #         steps:
-  #         - task: Bash@3
-  #           inputs:
-  #             targetType: 'inline'
-  #             script: |
-  #               #! /bin/bash
-                
-  #               sudo apt-get upgrade -y
-  #               sudo apt-get install python3-pip -y
-  #               sudo apt-get install unzip -y
-  #               sudo apt-get install -y chromium-browser
-  #               pip3 install selenium
-  #               export PATH=$PATH:some/path
+  - deployment: VMDeploy
+    displayName: "VMDeploy"
+    environment:
+      name:  VMEnv
+      resourceType: VirtualMachine
+      # tags: TAG NAME
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                #! /bin/bash
+                sudo apt-get update -y
+                sudo apt-get upgrade -y
+                sudo apt-get install python3-pip -y
+                sudo apt-get install unzip -y
+                sudo apt-get install -y chromium-browser
+                pip3 install selenium
+                export PATH=$PATH:some/path
+
+          - script: 'npm install -g newman'
+            workingDirectory: '$(System.DefaultWorkingDirectory)'
+            displayName: 'Install newman'
+          - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
+            workingDirectory: automatedtesting/postman
+            displayName: 'Run API Tests'
+          - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
+            workingDirectory: automatedtesting/postman
+            displayName: 'Run API Tests'
+          - task: PublishTestResults@2
+            displayName: 'Publish Test Results'
+            inputs:
+              testResultsFiles: '$(System.DefaultWorkingDirectory)\automatedtesting\postman\Results\*.xml'
 
 
