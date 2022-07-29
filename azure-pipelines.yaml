@@ -27,6 +27,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Pipeline Artifact'
       inputs:
+        artifactName: 'automatedtesting'
         targetPath: 'automatedtesting'
         publishLocation: 'pipeline'
 - stage:
@@ -70,7 +71,7 @@ stages:
                 export PATH=$PATH:some/path
               
           - script: 'python3 test.py'
-            workingDirectory: '$(Pipeline.Workspace)/selenium'
+            workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
 
           - script: 'npm install -g newman'
