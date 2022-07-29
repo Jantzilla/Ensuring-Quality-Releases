@@ -34,10 +34,10 @@ stages:
     - script: 'npm install -g newman'
       workingDirectory: '$(System.DefaultWorkingDirectory)'
       displayName: 'Install newman'
-    - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
+    - script: 'newman run Regression.json -e Environment.json --reporters cli,junit --reporter-junit-export results/junitReport.xml '
       workingDirectory: automatedtesting/postman
       displayName: 'Run API Tests'
-    - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml '
+    - script: 'newman run DataValidation.json -e Environment.json --reporters cli,junit --reporter-junit-export results/junitReport.xml '
       workingDirectory: automatedtesting/postman
       displayName: 'Run API Tests'
     - task: PublishTestResults@2
