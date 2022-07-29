@@ -24,6 +24,12 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact'
+      inputs:
+        artifactName: 'automatedtesting'
+        targetPath: 'automatedtesting'
+        publishLocation: 'pipeline'
 - stage:
   jobs:
   - deployment: FakeRestAPI
@@ -62,7 +68,32 @@ stages:
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
-                export PATH=$PATH:some/path
+              
+          - script: | 
+              echo $PATH
+              export PATH=$PATH:/usr/bin/chromedriver
+              echo $PATH
+              export PATH=$PATH:/usr/lib/chromium-browser/chromedriver
+              echo $PATH
+              whereis chromium-chromedriver
+              whereis chromedriver
+              whereis chromium-browser
+              export PATH=$PATH:/usr/bin/chromium-browser/chromedriver
+              export PATH=$PATH:/snap/bin/chromium.chromedriver
+              export PATH=$PATH:/snap/bin/chromium
+              echo $PATH
+              echo $CHROMEWEBDRIVER
+              export PATH=$PATH:$CHROMEWEBDRIVER
+              export PATH=$PATH:/usr/local/share/chrome_driver
+              echo $PATH
+              google-chrome --version
+              chromium --version 
+              sudo find / -type f -name chromedriver
+              export PATH=$PATH:/snap/chromium/2036/usr/lib/chromium-browser
+              echo $PATH
+              python3 test.py
+            workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
+            displayName: 'Run Functional Tests'
 
           - script: 'npm install -g newman'
             workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -78,24 +109,37 @@ stages:
             inputs:
               testResultsFiles: '$(System.DefaultWorkingDirectory)\automatedtesting\postman\Results\*.xml'
     
-    variables:
-      host: webapp-appservice-64078.azurewebsites.net
+  #   variables:
+  #     host: webapp-appservice-64078.azurewebsites.net
 
-  - job: jmeter
-    pool:
-      vmImage: ubuntu-latest
-    displayName: Run JMeter tests
-    steps:
-    - task: Bash@3
-      displayName: Execute JMeter tests
-      inputs:
-        targetType: filePath
-        filePath: 'automatedtesting/jmeter/test.sh'
-        arguments: '$PWD Endurance.jmx $(host)'
-        workingDirectory: automatedtesting/jmeter
-        failOnStderr: true
-    - task: PublishPipelineArtifact@1
-      displayName: Publish JMeter Report
-      inputs:
-        targetPath: jmeter/report
-        artifact: jmeter
+  # - job: jmeter
+  #   pool:
+  #     vmImage: ubuntu-latest
+  #   displayName: Run JMeter tests
+  #   steps:
+  #   - task: Bash@3
+  #     displayName: Execute JMeter Endurance Test
+  #     inputs:
+  #       targetType: filePath
+  #       filePath: 'automatedtesting/jmeter/test.sh'
+  #       arguments: '$PWD Endurance.jmx $(host)'
+  #       workingDirectory: automatedtesting/jmeter
+  #       failOnStderr: true
+  #   - task: PublishPipelineArtifact@1
+  #     displayName: Publish JMeter Endurance Test Report
+  #     inputs:
+  #       targetPath: jmeter/report
+  #       artifact: jmeter
+  #   - task: Bash@3
+  #     displayName: Execute JMeter Stress Test
+  #     inputs:
+  #       targetType: filePath
+  #       filePath: 'automatedtesting/jmeter/test.sh'
+  #       arguments: '$PWD Stress.jmx $(host)'
+  #       workingDirectory: automatedtesting/jmeter
+  #       failOnStderr: true
+  #   - task: PublishPipelineArtifact@1
+  #     displayName: Publish JMeter Stress Test Report
+  #     inputs:
+  #       targetPath: jmeter/report
+  #       artifact: jmeter
