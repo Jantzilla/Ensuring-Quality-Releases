@@ -24,6 +24,11 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
+    # - task: PublishPipelineArtifact@1
+    #   displayName: 'Publish Pipeline Artifact'
+    #   inputs:
+    #     targetPath: '$(Pipeline.Workspace)'
+    #     publishLocation: 'pipeline'
 - stage:
   jobs:
   - deployment: FakeRestAPI
@@ -65,7 +70,7 @@ stages:
                 export PATH=$PATH:some/path
               
           - script: 'python3 test.py'
-            workingDirectory: '$(Build.SourcesDirectory)/automatedtesting/selenium'
+            workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
 
           - script: 'npm install -g newman'
