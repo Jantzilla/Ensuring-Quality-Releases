@@ -65,7 +65,7 @@ stages:
                 export PATH=$PATH:some/path
               
           - script: 'python3 test.py'
-            workingDirectory: automatedtesting/selenium
+            workingDirectory: '$(Build.SourcesDirectory)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
 
           - script: 'npm install -g newman'
