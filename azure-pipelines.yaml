@@ -63,7 +63,8 @@ stages:
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
                 export PATH=$PATH:some/path
-                python3 automatedtesting/selenium/test.py
+                python3 test.py
+              workingDirectory: automatedtesting/selenium
 
           - script: 'npm install -g newman'
             workingDirectory: '$(System.DefaultWorkingDirectory)'
