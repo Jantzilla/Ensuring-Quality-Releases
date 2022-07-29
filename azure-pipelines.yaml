@@ -90,7 +90,7 @@ stages:
       displayName: Execute JMeter tests
       inputs:
         targetType: filePath
-        filePath: 'jmeter/test.sh'
+        filePath: 'automatedtesting/jmeter/test.sh'
         arguments: '$PWD Endurance.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
         failOnStderr: true
