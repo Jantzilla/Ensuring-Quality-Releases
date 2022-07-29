@@ -87,7 +87,7 @@ stages:
     displayName: Run JMeter tests
     steps:
     - task: Bash@3
-      displayName: Execute JMeter tests
+      displayName: Execute JMeter Endurance Test
       inputs:
         targetType: filePath
         filePath: 'automatedtesting/jmeter/test.sh'
@@ -95,7 +95,20 @@ stages:
         workingDirectory: automatedtesting/jmeter
         failOnStderr: true
     - task: PublishPipelineArtifact@1
-      displayName: Publish JMeter Report
+      displayName: Publish JMeter Endurance Test Report
+      inputs:
+        targetPath: jmeter/report
+        artifact: jmeter
+    - task: Bash@3
+      displayName: Execute JMeter Stress Test
+      inputs:
+        targetType: filePath
+        filePath: 'automatedtesting/jmeter/test.sh'
+        arguments: '$PWD Stress.jmx $(host)'
+        workingDirectory: automatedtesting/jmeter
+        failOnStderr: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish JMeter Stress Test Report
       inputs:
         targetPath: jmeter/report
         artifact: jmeter
