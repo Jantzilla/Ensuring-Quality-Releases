@@ -7,10 +7,10 @@ from remove import removeItemsFromCart
 
 # --uncomment when running in Azure DevOps.
 options = ChromeOptions()
+options.add_argument("--no-sandbox");
 options.add_argument("--headless") 
 
 # --needed for local testing environment
-options.add_argument("--no-sandbox");
 options.add_argument("--disable-dev-shm-usage");
 driver = webdriver.Chrome(options=options)
     # driver = webdriver.Chrome()
