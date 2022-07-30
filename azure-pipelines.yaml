@@ -109,7 +109,7 @@ stages:
               sudo find / -type f -name chromedriver
               # export PATH=$PATH:/snap/bin/chromium.chromedriver
               # echo $PATH
-              python3 test.py
+              python3 test.py > ~/logs/selenium.log.txt
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
     
