@@ -97,7 +97,7 @@ stages:
                 pip3 install selenium
               
           - script: | 
-              export PATH=$PATH:/snap/bin/chromium.chromedriver
+              # export PATH=$PATH:/snap/bin/chromium.chromedriver
               echo $PATH
               python3 test.py
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
