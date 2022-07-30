@@ -15,9 +15,13 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 options.add_argument("--window-size=1920,1080")
 options.add_argument("--remote-debugging-port=9222")
-# driver = webdriver.Chrome(options=options)
-driver = webdriver.Chrome(options=options, executable_path='/snap/bin/chromium.chromedriver')
-    # driver = webdriver.Chrome()
+
+# Ubuntu 18 VM
+driver = webdriver.Chrome(options=options)
+
+# Ubuntu 20 VM
+# driver = webdriver.Chrome(options=options, executable_path='/snap/bin/chromium.chromedriver')
+# driver = webdriver.Chrome()
 
 # Start the browser and login with standard_user
 def runTest ():
