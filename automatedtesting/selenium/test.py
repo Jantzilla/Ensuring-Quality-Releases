@@ -1,6 +1,4 @@
 # #!/usr/bin/env python
-import logging
-from opencensus.ext.azure.log_exporter import AzureEventHandler
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from login import login
@@ -27,12 +25,7 @@ driver = webdriver.Chrome(options=options)
 
 # Start the browser and login with standard_user
 def runTest ():
-    logger = logging.getLogger(__name__)
-    logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=76b11fbf-40af-4e03-9ecf-28e44b8778b9;'))
-    logger.setLevel(logging.INFO)
-
     print ('Starting the browser...')
-    logger.info('Starting the browser...')
     print ('Browser started successfully.')
     print ('Navigating to the demo page to login \n')
 
