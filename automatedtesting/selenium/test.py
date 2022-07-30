@@ -1,4 +1,5 @@
 # #!/usr/bin/env python
+import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from login import login
@@ -23,8 +24,11 @@ driver = webdriver.Chrome(options=options)
 # driver = webdriver.Chrome(options=options, executable_path='/snap/bin/chromium.chromedriver')
 # driver = webdriver.Chrome()
 
+log = logging.getLogger('foobar')
+
 # Start the browser and login with standard_user
 def runTest ():
+    log.info('Starting the browser...')
     print ('Starting the browser...')
     print ('Browser started successfully.')
     print ('Navigating to the demo page to login \n')
