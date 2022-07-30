@@ -1,9 +1,15 @@
 # #!/usr/bin/env python
+import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from login import login
 from add import addItemsToCart
 from remove import removeItemsFromCart
+
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 # --uncomment when running in Azure DevOps.
 options = ChromeOptions()
@@ -25,7 +31,8 @@ driver = webdriver.Chrome(options=options)
 
 # Start the browser and login with standard_user
 def runTest ():
-    print ('Starting the browser...')
+    # print ('Starting the browser...')
+    logging.info('Starting the browser...')
     print ('Browser started successfully.')
     print ('Navigating to the demo page to login \n')
 
