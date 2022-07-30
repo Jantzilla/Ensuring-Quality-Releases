@@ -111,7 +111,7 @@ stages:
               # echo $PATH
               sudo mkdir -p /logs
               sudo chmod 777 /logs
-              python3 test.py | tee /logs/output.txt
+              python3 test.py | tee -a /logs/output.txt
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
     
