@@ -12,9 +12,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -47,9 +51,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -83,9 +91,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -127,9 +139,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -172,9 +188,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}

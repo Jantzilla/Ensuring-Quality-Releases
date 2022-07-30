@@ -12,7 +12,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Body matches string\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Body matches string\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"Tiger Nixon\");",
 							"    pm.expect(pm.response.text()).to.include(\"Garrett Winters\");",
 							"    pm.expect(pm.response.text()).to.include(\"Ashton Cox\");",
@@ -38,7 +41,8 @@
 							"    pm.expect(pm.response.text()).to.include(\"Caesar Vance\");",
 							"    pm.expect(pm.response.text()).to.include(\"Doris Wilder\");",
 							"    pm.expect(pm.response.text()).to.include(\"Successfully! All records has been fetched.\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -71,10 +75,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Body matches string\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Body matches string\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"Tiger Nixon\");",
 							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been fetched.\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -110,10 +118,15 @@
 						"exec": [
 							"var name = pm.environment.get(\"name\")",
 							"",
-							"pm.test(\"Body matches string\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Body matches string\", function () {",
 							"    pm.expect(pm.response.text()).to.include(name);",
 							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been added.\");",
-							"});"
+							"});",
+							"}",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -157,10 +170,14 @@
 						"exec": [
 							"var name = pm.environment.get(\"name\")",
 							"",
-							"pm.test(\"Body matches string\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Body matches string\", function () {",
 							"    pm.expect(pm.response.text()).to.include(name);",
 							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been updated.\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -205,10 +222,14 @@
 						"exec": [
 							"var id = pm.environment.get(\"id\")",
 							"",
-							"pm.test(\"Body matches string\", function () {",
+							"if (pm.response.code == 429) {",
+							"  postman.setNextRequest(pm.info.requestId);",
+							"} else {",
+							"    pm.test(\"Body matches string\", function () {",
 							"    pm.expect(pm.response.text()).to.include(id);",
 							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been deleted\");",
-							"});"
+							"});",
+							"}"
 						],
 						"type": "text/javascript"
 					}
