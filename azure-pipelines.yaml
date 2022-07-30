@@ -94,11 +94,11 @@ stages:
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
-                pip3 install opencensus-ext-azure
                 pip3 install selenium
               
           - script: | 
               # Install ChromeDriver.
+              wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w 8a8b64fa-ba36-4f8c-bfdc-7c5be1159f57 -s 0ZzYtpmatrGwZMRrx2xircMdjzHUVVgVxAfy0/f9F7thdlc49ugagbzg+p9FNN7mBUpHcxCYI6hutmQRx/DyIA== -d opinsights.azure.com
               CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE`
               wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
               unzip ~/chromedriver_linux64.zip -d ~/
