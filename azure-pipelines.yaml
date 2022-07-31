@@ -128,7 +128,7 @@ stages:
       continueOnError: true
       inputs:
         targetType: filePath
-        filePath: 'automatedtesting/jmeter/test.sh'
+        filePath: 'automatedtesting/jmeter/endurance.sh'
         arguments: '$PWD Endurance.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
         # failOnStderr: true
@@ -142,7 +142,7 @@ stages:
       continueOnError: true
       inputs:
         targetType: filePath
-        filePath: 'automatedtesting/jmeter/test.sh'
+        filePath: 'automatedtesting/jmeter/stress.sh'
         arguments: '$PWD Stress.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
         failOnStderr: true
