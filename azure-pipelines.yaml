@@ -132,11 +132,11 @@ stages:
         arguments: '$PWD Endurance.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
         # failOnStderr: true
-    - task: PublishPipelineArtifact@1
-      displayName: Publish JMeter Endurance Test Report
-      inputs:
-        targetPath: automatedtesting/jmeter
-        artifact: jmeter
+    # - task: PublishPipelineArtifact@1
+    #   displayName: Publish JMeter Endurance Test Report
+    #   inputs:
+    #     targetPath: automatedtesting/jmeter
+    #     artifact: enduranceReport
     - task: Bash@3
       displayName: Execute JMeter Stress Test
       continueOnError: true
@@ -146,8 +146,8 @@ stages:
         arguments: '$PWD Stress.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
         failOnStderr: true
-    - task: PublishPipelineArtifact@1
-      displayName: Publish JMeter Stress Test Report
-      inputs:
-        targetPath: automatedtesting/jmeter
-        artifact: jmeter
+    # - task: PublishPipelineArtifact@1
+    #   displayName: Publish JMeter Stress Test Report
+    #   inputs:
+    #     targetPath: automatedtesting/jmeter
+    #     artifact: stressReport
