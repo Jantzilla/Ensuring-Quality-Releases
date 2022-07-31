@@ -145,7 +145,7 @@ stages:
         filePath: 'automatedtesting/jmeter/stress.sh'
         arguments: '$PWD Stress.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
-        failOnStderr: true
+        # failOnStderr: true
     # - task: PublishPipelineArtifact@1
     #   displayName: Publish JMeter Stress Test Report
     #   inputs:
