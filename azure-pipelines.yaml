@@ -125,12 +125,13 @@ stages:
     steps:
     - task: Bash@3
       displayName: Execute JMeter Endurance Test
+      continueOnError: true
       inputs:
         targetType: filePath
         filePath: 'automatedtesting/jmeter/test.sh'
         arguments: '$PWD Endurance.jmx $(host)'
         workingDirectory: automatedtesting/jmeter
-        failOnStderr: true
+        # failOnStderr: true
     - task: PublishPipelineArtifact@1
       displayName: Publish JMeter Endurance Test Report
       inputs:
@@ -138,6 +139,7 @@ stages:
         artifact: jmeter
     - task: Bash@3
       displayName: Execute JMeter Stress Test
+      continueOnError: true
       inputs:
         targetType: filePath
         filePath: 'automatedtesting/jmeter/test.sh'
