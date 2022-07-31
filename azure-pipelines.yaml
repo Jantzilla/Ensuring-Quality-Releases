@@ -38,26 +38,26 @@ stages:
         targetPath: 'automatedtesting'
         publishLocation: 'pipeline'
 
-    # - script: 'npm install -g newman'
-    #   workingDirectory: '$(System.DefaultWorkingDirectory)'
-    #   displayName: 'Install newman'
-    # - script: 'newman run Regression.json -e Environment.json --delay-request 2500 --reporters cli,junit --reporter-junit-export results/regressionReport.xml '
-    #   workingDirectory: automatedtesting/postman
-    #   displayName: 'Run API Tests'
-    #   continueOnError: true
-    # - task: PublishTestResults@2
-    #   displayName: 'Publish Regression Test Results'
-    #   inputs:
-    #     testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/results/*.xml'
+    - script: 'npm install -g newman'
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+      displayName: 'Install newman'
+    - script: 'newman run Regression.json -e Environment.json --delay-request 2500 --reporters cli,junit --reporter-junit-export results/regressionReport.xml '
+      workingDirectory: automatedtesting/postman
+      displayName: 'Run API Tests'
+      continueOnError: true
+    - task: PublishTestResults@2
+      displayName: 'Publish Regression Test Results'
+      inputs:
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/results/*.xml'
 
-    # - script: 'newman run DataValidation.json -e Environment.json --delay-request 2500 --reporters cli,junit --reporter-junit-export results/dataValidationReport.xml '
-    #   workingDirectory: automatedtesting/postman
-    #   displayName: 'Run API Tests'
-    #   continueOnError: true
-    # - task: PublishTestResults@2
-    #   displayName: 'Publish Data Validation Test Results'
-    #   inputs:
-    #     testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/results/*.xml'
+    - script: 'newman run DataValidation.json -e Environment.json --delay-request 2500 --reporters cli,junit --reporter-junit-export results/dataValidationReport.xml '
+      workingDirectory: automatedtesting/postman
+      displayName: 'Run API Tests'
+      continueOnError: true
+    - task: PublishTestResults@2
+      displayName: 'Publish Data Validation Test Results'
+      inputs:
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/results/*.xml'
 - stage:
   jobs:
   - deployment: FakeRestAPI
@@ -115,37 +115,37 @@ stages:
             workingDirectory: '$(Pipeline.Workspace)/automatedtesting/selenium'
             displayName: 'Run Functional Tests'
     
-  #   variables:
-  #     host: webapp-appservice-64078.azurewebsites.net
+    variables:
+      host: webapp-appservice-64078.azurewebsites.net
 
-  # - job: jmeter
-  #   pool:
-  #     vmImage: ubuntu-latest
-  #   displayName: Run JMeter tests
-  #   steps:
-  #   - task: Bash@3
-  #     displayName: Execute JMeter Endurance Test
-  #     inputs:
-  #       targetType: filePath
-  #       filePath: 'automatedtesting/jmeter/test.sh'
-  #       arguments: '$PWD Endurance.jmx $(host)'
-  #       workingDirectory: automatedtesting/jmeter
-  #       failOnStderr: true
-  #   - task: PublishPipelineArtifact@1
-  #     displayName: Publish JMeter Endurance Test Report
-  #     inputs:
-  #       targetPath: jmeter/report
-  #       artifact: jmeter
-  #   - task: Bash@3
-  #     displayName: Execute JMeter Stress Test
-  #     inputs:
-  #       targetType: filePath
-  #       filePath: 'automatedtesting/jmeter/test.sh'
-  #       arguments: '$PWD Stress.jmx $(host)'
-  #       workingDirectory: automatedtesting/jmeter
-  #       failOnStderr: true
-  #   - task: PublishPipelineArtifact@1
-  #     displayName: Publish JMeter Stress Test Report
-  #     inputs:
-  #       targetPath: jmeter/report
-  #       artifact: jmeter
+  - job: jmeter
+    pool:
+      vmImage: ubuntu-latest
+    displayName: Run JMeter tests
+    steps:
+    - task: Bash@3
+      displayName: Execute JMeter Endurance Test
+      inputs:
+        targetType: filePath
+        filePath: 'automatedtesting/jmeter/test.sh'
+        arguments: '$PWD Endurance.jmx $(host)'
+        workingDirectory: automatedtesting/jmeter
+        failOnStderr: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish JMeter Endurance Test Report
+      inputs:
+        targetPath: jmeter/report
+        artifact: jmeter
+    - task: Bash@3
+      displayName: Execute JMeter Stress Test
+      inputs:
+        targetType: filePath
+        filePath: 'automatedtesting/jmeter/test.sh'
+        arguments: '$PWD Stress.jmx $(host)'
+        workingDirectory: automatedtesting/jmeter
+        failOnStderr: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish JMeter Stress Test Report
+      inputs:
+        targetPath: jmeter/report
+        artifact: jmeter
