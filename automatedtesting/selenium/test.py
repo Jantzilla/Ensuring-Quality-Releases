@@ -31,7 +31,7 @@ driver = webdriver.Chrome(options=options)
 
 # Start the browser and login with standard_user
 def runTest ():
-    logging.info('')
+    logging.info('Starting the browser...')
     print ('Starting the browser...')
     print ('Browser started successfully.')
     print ('Navigating to the demo page to login \n')
