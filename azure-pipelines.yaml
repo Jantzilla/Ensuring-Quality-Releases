@@ -135,7 +135,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: Publish JMeter Endurance Test Report
       inputs:
-        targetPath: jmeter/report
+        targetPath: jmeter
         artifact: jmeter
     - task: Bash@3
       displayName: Execute JMeter Stress Test
@@ -149,5 +149,5 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: Publish JMeter Stress Test Report
       inputs:
-        targetPath: jmeter/report
+        targetPath: jmeter
         artifact: jmeter
